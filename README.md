@@ -1,4 +1,4 @@
-# SENG275Project
+# SENG474Project
 Life Expectancy predictor using Linear Regression
 
 
