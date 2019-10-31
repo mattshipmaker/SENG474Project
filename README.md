@@ -1,4 +1,4 @@
-# SENG474Project
+# SENG 474 - Data Mining Project
 Life Expectancy predictor using Linear Regression
 
 
