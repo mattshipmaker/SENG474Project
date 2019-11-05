@@ -9,6 +9,7 @@ dev_host = '127.0.0.1'
 dev_port = '8080'
 db = '../data/db.db'
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
