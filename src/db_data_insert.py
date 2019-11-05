@@ -46,15 +46,12 @@ def imr():
 
             if(year_id == None or country_id == None):
                 print(country, year, country_id, year_id)
-
-            #curs.execute("""INSERT INTO 
-            #infant_mortality_rate(imr_id, country_id, year_id, both, male, female, both_b, both_c, male_b, female_b)
-            #VALUES(?,?,?,?,?,?,?,?,?,?)
-            #""", ())
-
-
-
-            
+            else:
+                curs.execute("""INSERT INTO 
+                infant_mortality_rate(country_id, year_id, both, male, female, both_b, both_c, male_b, female_b)
+                VALUES(?,?,?,?,?,?,?,?,?)
+                """, (country_id, year_id, both, male, female, both_b, both_c, male_b, female_b))
+    con.commit()
 
 def year():
     con = None
