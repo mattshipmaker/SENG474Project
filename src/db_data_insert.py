@@ -15,7 +15,6 @@ def get_country_id(countries, country):
         if y == country:
             return x
 
-
 def imr():
 
     con = get_connection()
@@ -103,7 +102,7 @@ def main():
     print("for reading csv -> insert into db")
     #country()
     #year()
-    imr()
+    #imr()
 
 if __name__ == "__main__":
     main()

@@ -21,7 +21,6 @@ def full_delete(dbname):
     except Error as e:
         print("failed to delete: {e}".format(e))
 
-
 def init(dbname):
     conn = sqlite3.connect(dbname)
     curs = conn.cursor()
@@ -64,12 +63,10 @@ def init(dbname):
     except Error as e:
         print("failed to init db tables: {}".format(e))
 
-
 def main():
     print("SQLite3 database initialization")
     
-    init("/home/matt/Documents/School/SENG474/SENG474Project/data/db.db")
-    
+    #init("/home/matt/Documents/School/SENG474/SENG474Project/data/db.db")
     #full_delete("/home/matt/Documents/School/SENG474/SENG474Project/data/db.db")
 
 if __name__ == '__main__':
