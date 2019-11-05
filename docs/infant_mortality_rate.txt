@@ -1,0 +1,19 @@
+infant_mortality_rate(country_id, year_id, both, male, female, both_b, both_c, male_b, female_b)
+
+country_id: Country
+
+year_id: Year
+
+Infant Mortality Rate (probability of dying between birth and age 1 (per 1000 live births))
+    both: Both sexs
+    male: Male
+    female: Female
+
+Neonatal Mortality Rate (per 1000 live births)
+    both_b: Both Sexes
+
+Under-five Mortality Rate (probability of dying by age 5 (per 1000 live births))
+    both_c: Both Sexes
+    male_b: Male
+    female_b: Female
+
