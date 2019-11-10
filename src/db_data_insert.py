@@ -1,9 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 import csv
-
-dev_path = "/home/matt/Documents/School/SENG474/SENG474Project/data/db.db"
-prod_path = ""
+import db
 
 def get_year_id(years, year):
     for (x,y) in years:
@@ -17,8 +15,7 @@ def get_country_id(countries, country):
 
 def md():
 
-    con = get_connection()
-    cur = con.cursor()
+    con, cur = db.get_connection()
 
     cur.execute("SELECT * FROM year")
     y = cur.fetchall()
@@ -51,8 +48,7 @@ def md():
 
 def imr():
 
-    con = get_connection()
-    curs = con.cursor()
+    con, curs = db.get_connection()
 
     curs.execute("SELECT * FROM year")
     y = curs.fetchall()
@@ -89,8 +85,7 @@ def imr():
 def year():
     con = None
     try:
-        con = get_connection()
-        curs = con.cursor()
+        con, curs = db.get_connection()
 
         years = [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
         i = 0
@@ -116,8 +111,7 @@ def country():
 
     con = None
     try:
-        con = get_connection()
-        curs = con.cursor()
+        con, curs = db.get_connection()
         i = 0
         for r in rows:
             curs.execute("INSERT INTO country(country_id, name) VALUES(?,?) ", (i,r))
@@ -128,9 +122,6 @@ def country():
     finally:
         con.commit()
         con.close()
-                
-def get_connection():
-    return sqlite3.connect(dev_path)
 
 def main():
     print("for reading csv -> insert into db")

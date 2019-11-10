@@ -2,6 +2,11 @@ import sqlite3
 
 db_name = "../data/db.db"
 
+def get_malaria_deaths():
+    con, cur = get_connection()
+    cur.execute("""SELECT * FROM malaria_deaths """)
+    return cur.fetchall()
+
 def get_imr():
     con, cur = get_connection()
     cur.execute("""SELECT * FROM infant_mortality_rate """)
@@ -10,6 +15,11 @@ def get_imr():
 def get_countries():
     con, cur = get_connection()
     cur.execute("""SELECT * FROM COUNTRY """)
+    return cur.fetchall()
+
+def get_country(id):
+    con, cur = get_connection()
+    cur.execute("""SELECT name FROM country WHERE country_id = ? """,(id))
     return cur.fetchall()
 
 def get_years():
@@ -24,7 +34,6 @@ def get_connection():
 
 def main():
     print("database")
-    print(get_imr())
 
 if __name__ == "__main__":
     main()
