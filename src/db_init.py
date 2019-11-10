@@ -58,6 +58,17 @@ def init(dbname):
             FOREIGN KEY(year_id) REFERENCES year(year_id));
         """)
 
+        curs.execute("""
+        CREATE TABLE IF NOT EXISTS malaria_deaths(
+            md_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            country_id INTEGER NOT NULL,
+            year_id INTEGER NOT NULL,
+            deaths INTEGER NOT NULL,
+            FOREIGN KEY(country_id) REFERENCES country(country_id),
+            FOREIGN KEY(year_id) REFERENCES year(year_id)
+            );
+        """)
+
         print("Sucess")
 
     except Error as e:
@@ -66,7 +77,7 @@ def init(dbname):
 def main():
     print("SQLite3 database initialization")
     
-    #init("/home/matt/Documents/School/SENG474/SENG474Project/data/db.db")
+    init("/home/matt/Documents/School/SENG474/SENG474Project/data/db.db")
     #full_delete("/home/matt/Documents/School/SENG474/SENG474Project/data/db.db")
 
 if __name__ == '__main__':

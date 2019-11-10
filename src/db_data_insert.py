@@ -15,6 +15,40 @@ def get_country_id(countries, country):
         if y == country:
             return x
 
+def md():
+
+    con = get_connection()
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM year")
+    y = cur.fetchall()
+
+    cur.execute("SELECT * FROM country")
+    c = cur.fetchall()
+
+    yy = [2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010]
+
+    with open("../data/MalariaDeaths.csv", newline='\n') as f:
+        reader = csv.reader(f, delimiter=',')
+        for row in reader:
+            country = row[0]
+            yyy = zip(yy, row[1:])
+
+            for q in yyy:
+                year = q[0]
+                data = q[1].split('[')[0].replace(' ','')
+
+                year_id = get_year_id(y, year)
+                country_id = get_country_id(c, country)
+
+                if country_id is not None:
+                    cur.execute(""" 
+                    INSERT INTO malaria_deaths(country_id, year_id, deaths)
+                    VALUES(?, ?, ?)
+                    """,(country_id, year_id, data))
+                    
+    con.commit()
+
 def imr():
 
     con = get_connection()
@@ -103,6 +137,7 @@ def main():
     #country()
     #year()
     #imr()
+    #md()
 
 if __name__ == "__main__":
     main()
