@@ -1,0 +1,9 @@
+https://apps.who.int/gho/data/view.main.SDGWSHBOD392v?lang=en\
+
+Country,
+
+Mortality rate attributed to exposure to unsafe WASH services (per 100,000 population)
+    both, male, female, 
+    
+SDG 3.9.2 WASH deaths
+    both_b
