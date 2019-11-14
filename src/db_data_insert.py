@@ -13,6 +13,38 @@ def get_country_id(countries, country):
         if y == country:
             return x
 
+def le():
+    con, curs = db.get_connection()
+
+    curs.execute("SELECT * FROM year")
+    y = curs.fetchall()
+
+    curs.execute("SELECT * FROM country")
+    c = curs.fetchall()
+
+    with open("../data/LifeExpectancy.csv", newline='\n') as f:
+        reader = csv.reader(f, delimiter=',')
+        for row in reader:
+            country = row[0]
+            year = row[1]
+            both = row[2]
+            male = row[3]
+            female = row[4]
+
+            year_id = get_year_id(y, year)
+            country_id = get_country_id(c, country)
+
+
+            if(year_id == None or country_id == None):
+                print(country, year)
+            else:
+                curs.execute("""
+                INSERT INTO
+                life_expectancy(country_id, year_id, both, male, female)
+                VALUES(?,?,?,?,?)
+                """,(country_id, year_id, both, male, female))
+    con.commit()
+
 def md():
 
     con, cur = db.get_connection()
@@ -129,6 +161,7 @@ def main():
     #year()
     #imr()
     #md()
+    #le()
 
 if __name__ == "__main__":
     main()

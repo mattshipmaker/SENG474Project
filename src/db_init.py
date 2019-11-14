@@ -74,6 +74,19 @@ def init(dbname):
             );
         """)
 
+        curs.execute(""" 
+        CREATE TABLE IF NOT EXISTS life_expectancy(
+            le_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            country_id INTEGER NOT NULL,
+            year_id NOT NULL,
+            both REAL NOT NULL,
+            male REAL NOT NULL,
+            female REAL NOT NULL,
+            FOREIGN KEY(country_id) REFERENCES country(country_id),
+            FOREIGN KEY(year_id) REFERENCES year(year_id)
+        );
+        """)
+
         print("Sucess")
 
     except Error as e:

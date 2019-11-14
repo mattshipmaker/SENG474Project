@@ -14,6 +14,5 @@ Neonatal Mortality Rate (per 1000 live births)
 
 Under-five Mortality Rate (probability of dying by age 5 (per 1000 live births))
     both_c: Both Sexes
-    male_b: Male
-    female_b: Female
-
+    male_c: Male
+    female_c: Female
