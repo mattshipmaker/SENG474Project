@@ -21,7 +21,7 @@ def country_info(id):
     country = db.get_country(id)
     country_data = db.get_country_data(id)
 
-    return render_template("country.html",country = country[0], country_data = country_data)
+    return render_template("country.html", country=country[0], country_data=country_data)
 
 
 if __name__ == '__main__':
