@@ -67,8 +67,8 @@ def imr():
             female = row[4]
             both_b = row[5]
             both_c = row[6]
-            male_b = row[7]
-            female_b = row[8]
+            male_c = row[7]
+            female_c = row[8]
 
             year_id = get_year_id(y, year)
             country_id = get_country_id(c, country)
@@ -77,9 +77,9 @@ def imr():
                 print(country, year, country_id, year_id)
             else:
                 curs.execute("""INSERT INTO 
-                infant_mortality_rate(country_id, year_id, both, male, female, both_b, both_c, male_b, female_b)
+                infant_mortality_rate(country_id, year_id, both, male, female, both_b, both_c, male_c, female_c)
                 VALUES(?,?,?,?,?,?,?,?,?)
-                """, (country_id, year_id, both, male, female, both_b, both_c, male_b, female_b))
+                """, (country_id, year_id, both, male, female, both_b, both_c, male_c, female_c))
     con.commit()
 
 def year():

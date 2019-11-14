@@ -1,5 +1,10 @@
 import sqlite3
 from sqlite3 import Error
+import db
+
+def imr_delete(dbname):
+    con, curs = db.get_connection()
+    curs.execute(""" DROP TABLE infant_mortality_rate""")
 
 def full_delete(dbname):
     con = sqlite3.connect(dbname)
@@ -52,8 +57,8 @@ def init(dbname):
             female REAL NOT NULL,
             both_b REAL NOT NULL, 
             both_c REAL NOT NULL,
-            male_b REAL NOT NULL, 
-            female_b REAL NOT NULL,
+            male_c REAL NOT NULL, 
+            female_c REAL NOT NULL,
             FOREIGN KEY(country_id) REFERENCES country(country_id),
             FOREIGN KEY(year_id) REFERENCES year(year_id));
         """)
@@ -77,8 +82,9 @@ def init(dbname):
 def main():
     print("SQLite3 database initialization")
     
-    init("/home/matt/Documents/School/SENG474/SENG474Project/data/db.db")
+    #init("/home/matt/Documents/School/SENG474/SENG474Project/data/db.db")
     #full_delete("/home/matt/Documents/School/SENG474/SENG474Project/data/db.db")
+    #imr_delete("../data/db.db")
 
 if __name__ == '__main__':
     main()
