@@ -11,11 +11,11 @@ dev_port = '8080'
 database_name = '../data/db.db'
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
-@app.route('/country/<id>')
+@app.route('/country/<id>', methods=['GET'])
 def country_info(id):
 
     country = db.get_country(id)
