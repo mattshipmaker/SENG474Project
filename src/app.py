@@ -15,7 +15,7 @@ database_name = '../data/db.db'
 def index():
     return render_template('index.html')
 
-@app.route('/country/<id>', methods=['GET'])
+@app.route('/country?id=<id>', methods=['GET'])
 def country_info(id):
 
     country = db.get_country(id)

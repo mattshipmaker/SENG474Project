@@ -38,12 +38,26 @@ def train(X, y, weight, learning_rate, iters):
 def scale(X, x_min, x_max):
     nom = (X-X.min(axis=0))*(x_max-x_min)
     denom = X.max(axis=0) - X.min(axis=0)
-    denom[denom==0] = 1
+    denom[denom==0] = 1.0
     return x_min + nom/denom
 
 def create_weights(n):
     return np.array([[0.0] for i in range(n)])
 
+def test(w):
+
+    X = np.array([[
+        1.000, 
+        0.9,
+        0.9,
+        0.9,
+        0.9,
+        0.9, 
+        0.9, 
+        0.9, 
+        0.9
+    ]])
+    return predict(X,w)
 
 def main():
     
@@ -67,9 +81,13 @@ def main():
     X_scaled = scale(X, 0, 1)
     X_scaled = np.insert(X_scaled, 0, 1, axis=1)
 
+    print(X_scaled[80])
+
     W = create_weights(len(X_scaled[1]))
 
     w, ch = train(X_scaled, Y, W, 0.01, 1000)
+
+    print(test(w))
 
     #return w
 

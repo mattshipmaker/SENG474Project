@@ -45,6 +45,28 @@ def le():
                 """,(country_id, year_id, both, male, female))
     con.commit()
 
+def wmr():
+    con, cur = db.get_connection()
+
+    year_id = db.get_year(2016)[0]
+    countries = db.get_countries()
+
+    with open("../data/WASHMortalityRate.csv", newline='\n') as f:
+        reader = csv.reader(f, delimiter=',')
+        for row in reader:
+            country_id = get_country_id(countries, row[0])
+            if country_id is not None:
+                data = [ r.strip('<').strip(' ') for r in row[1:]]   
+                data.insert(0,year_id)
+                data.insert(0,country_id)
+
+                cur.execute("""
+                INSERT INTO wmr(country_id, year_id, both, male, female, both_deaths)
+                VALUES(?,?,?,?,?,?)
+                """, data)
+    con.commit()
+    return 
+
 def md():
 
     con, cur = db.get_connection()
@@ -162,6 +184,7 @@ def main():
     #imr()
     #md()
     #le()
+    #wmr()
 
 if __name__ == "__main__":
     main()
