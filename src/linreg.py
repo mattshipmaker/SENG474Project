@@ -50,18 +50,22 @@ def test(w):
         1.000, 
         0.9,
         0.9,
-        0.9,
-        0.9,
-        0.9, 
-        0.9, 
-        0.9, 
         0.9
     ]])
-    return predict(X,w)
+
+    Y = np.array([[
+        1.000, 
+        0.01,
+        0.01,
+        0.01
+    ]])
+
+    
+    return predict(X,w), predict(Y,w)
 
 def main():
     
-    year = db.get_year(2015)
+    year = db.get_year(2016)
     countries = db.get_countries()
     #labels: life expectancy for a year 
 
@@ -69,7 +73,7 @@ def main():
     X = []
    
     for c in countries:
-        x = db.get_country_data_by_year(c[0], 2015)
+        x = db.get_country_data_by_year(c[0], 2016)
         if len(x) != 0:
             X.append(list(x[0]))
             y = db.get_le_by_year_id(c[0], year[0])
@@ -81,15 +85,17 @@ def main():
     X_scaled = scale(X, 0, 1)
     X_scaled = np.insert(X_scaled, 0, 1, axis=1)
 
-    print(X_scaled[80])
+    for n in zip(X, X_scaled, Y):
+        #print(n)
+        pass
 
     W = create_weights(len(X_scaled[1]))
 
-    w, ch = train(X_scaled, Y, W, 0.01, 1000)
+    w, ch = train(X_scaled, Y, W, 0.001, 100000)
 
-    print(test(w))
+    #print(test(w))
 
-    #return w
+    return w
 
 if __name__ == "__main__":
     main()

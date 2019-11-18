@@ -43,11 +43,11 @@ def get_country_data(id):
 def get_country_data_by_year(id, year):
     con, cur = get_connection()
     cur.execute(""" 
-    SELECT imr.both, imr.male, imr.female, imr.both_b, imr.both_c, imr.male_c, imr.female_c,
-    md.deaths
+    SELECT imr.both, wmr.both, md.deaths
     FROM country c 
     JOIN infant_mortality_rate imr ON imr.country_id = c.country_id 
     JOIN malaria_deaths md ON md.country_id = c.country_id AND md.year_id = y.year_id 
+    JOIN wmr on wmr.country_id = c.country_id  AND wmr.year_id = y.year_id 
     JOIN year y on y.year_id = imr.year_id
     WHERE c.country_id = ? AND y.year = ?;
     """, (id, year))
