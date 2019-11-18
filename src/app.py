@@ -10,7 +10,7 @@ dev_host = '127.0.0.1'
 dev_port = '8080'
 database_name = '../data/db.db'
 
-@app.route('/predict?',method=['POST'])
+@app.route('/predict?',methods=['POST'])
 def predict(x, y, z):
     return 
 

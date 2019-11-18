@@ -89,7 +89,7 @@ def main():
 
     w, ch = train(X_scaled, Y, W, 0.001, 100000)
 
-    #giprint(test(w))
+    print(test(w))
 
     return w
 
