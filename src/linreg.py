@@ -85,15 +85,11 @@ def main():
     X_scaled = scale(X, 0, 1)
     X_scaled = np.insert(X_scaled, 0, 1, axis=1)
 
-    for n in zip(X, X_scaled, Y):
-        #print(n)
-        pass
-
     W = create_weights(len(X_scaled[1]))
 
     w, ch = train(X_scaled, Y, W, 0.001, 100000)
 
-    #print(test(w))
+    #giprint(test(w))
 
     return w
 
