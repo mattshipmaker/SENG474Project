@@ -73,7 +73,7 @@ def main():
     X = []
    
     for c in countries:
-        x = db.get_country_data_by_year(c[0], 2016)
+        x = db.get_country_data_by_year(c[0], year[1])
         if len(x) != 0:
             X.append(list(x[0]))
             y = db.get_le_by_year_id(c[0], year[0])

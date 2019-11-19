@@ -2,6 +2,7 @@ import sqlite3
 from sqlite3 import Error
 import csv
 import db
+import requests
 
 def get_year_id(years, year):
     for (x,y) in years:
