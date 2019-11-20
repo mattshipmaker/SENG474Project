@@ -59,15 +59,11 @@ def test(w):
         0.01,
         0.01
     ]])
-
-    
     return predict(X,w), predict(Y,w)
 
-def main():
-    
-    year = db.get_year(2016)
+def get_weights(y):
+    year = db.get_year(y)
     countries = db.get_countries()
-    #labels: life expectancy for a year 
 
     Y = [] 
     X = []
@@ -89,9 +85,12 @@ def main():
 
     w, ch = train(X_scaled, Y, W, 0.001, 100000)
 
-    print(test(w))
-
     return w
 
-if __name__ == "__main__":
-    main()
+def run(predictor, y):
+
+    w = get_weights(y)
+
+    predictor = np.insert(predictor, 0, 1)
+
+    return predict(predictor, w)[0]
