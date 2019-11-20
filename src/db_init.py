@@ -10,6 +10,8 @@ def full_delete(dbname):
     con = sqlite3.connect(dbname)
     curs = con.cursor()
 
+    #TODO: all tables
+
     try:
         curs.execute("""
         DROP TABLE country
@@ -35,16 +37,14 @@ def init(dbname):
         curs.execute("""
         CREATE TABLE IF NOT EXISTS country(
             country_id INTEGER PRIMARY KEY AUTOINCREMENT, 
-            name STRING NOT NULL
-        );
+            name STRING NOT NULL);
         """)
 
     ## create year table
         curs.execute("""
         CREATE TABLE IF NOT EXISTS year(
             year_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            year INTEGER NOT NULL
-        );
+            year INTEGER NOT NULL);
         """)
 
         curs.execute("""
@@ -70,8 +70,7 @@ def init(dbname):
             year_id INTEGER NOT NULL,
             deaths INTEGER NOT NULL,
             FOREIGN KEY(country_id) REFERENCES country(country_id),
-            FOREIGN KEY(year_id) REFERENCES year(year_id)
-            );
+            FOREIGN KEY(year_id) REFERENCES year(year_id));
         """)
 
         curs.execute(""" 
@@ -83,8 +82,20 @@ def init(dbname):
             male REAL NOT NULL,
             female REAL NOT NULL,
             FOREIGN KEY(country_id) REFERENCES country(country_id),
-            FOREIGN KEY(year_id) REFERENCES year(year_id)
-        );
+            FOREIGN KEY(year_id) REFERENCES year(year_id));
+        """)
+
+        curs.execute("""
+        CREATE TABLE IF NOT EXISTS wmr(
+            wmr_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            country_id INTEGER NOT NULL,
+            year_id INTEGER NOT NULL,
+            both REAL NOT NULL,
+            male REAL NOT NULL,
+            female REAL NOT NULL,
+            both_deaths REAL NOT NULL,
+            FOREIGN KEY(country_id) REFERENCES country(country_id),
+            FOREIGN KEY(year_id) REFERENCES year(year_id));
         """)
 
         print("Sucess")

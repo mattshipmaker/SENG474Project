@@ -6,4 +6,9 @@ Mortality rate attributed to exposure to unsafe WASH services (per 100,000 popul
     both, male, female, 
     
 SDG 3.9.2 WASH deaths
-    both_b
+    both_deaths
+
+
+,"Mortality rate attributed to exposure to unsafe WASH services (per 100 000 population) (SDG 3.9.2)","Mortality rate attributed to exposure to unsafe WASH services (per 100 000 population) (SDG 3.9.2)","Mortality rate attributed to exposure to unsafe WASH services (per 100 000 population) (SDG 3.9.2)","SDG 3.9.2 WASH deaths"
+,"2016","2016","2016","2016"
+"Country","Both sexes","Male","Female","Both sexes"
