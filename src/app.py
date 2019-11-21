@@ -18,15 +18,14 @@ database_name = '../data/db.db'
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    x = float(request.args.get('x'))
-    y = float(request.args.get('y'))
-    z = float(request.args.get('z'))
+    x = float(request.args.get('x')) / 100
+    y = float(request.args.get('y')) / 100
+    z = float(request.args.get('z')) / 100
 
     X = np.array([x, y, z])
 
-    ans = linreg.run(X, 2016)
-
-    return jsonify(ans)
+    # Convert to string and return
+    return str(linreg.run(X, 2016))
 
 
 @app.route('/', methods=['GET'])
