@@ -26,7 +26,10 @@
                     <nav class="nav">
                         <ul class="nav-list">
                             <li class="nav-item">
-                                <a class="btn" href="https://github.com/mattshipmaker/SENG474Project">GitHub</a>
+                                <a class="btn" href="#">GitHub</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn" href="#">Documentation</a>
                             </li>
                         </ul>
                     </nav>
@@ -108,12 +111,10 @@
                     </section>
                 </div>
                 <div class="divider"></div>
-
                     <section class="post">
                         <header class="post-header">
                             <h2 class="post-title">Create Country</h2>
                         </header>
-
                         <div class="container">
                             <div class="columns">
                                 <div class="column col-8">
@@ -209,10 +210,12 @@
                                                   </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <button id="submit" class="btn btn-primary p-centered">Create Country</button>
                                     </form>
+                                    <span>Life Expectancy: </span><div id="placeholder"></div>
+                                    <div id="meter"></div>
+
                                 </div>
                             </div>
                         </div>
@@ -225,22 +228,32 @@
 
         <script type="text/javascript">
             $(document).ready(function(){
-                $("#submit").on('click', function(){
-                    event.preventDefault();
-                    console.log(document.querySelector('#infant_mortality_rate').value + ", " + document.querySelector('#malaria_mortality_rate').value + ", " + document.querySelector('#wash_mortality_rate').value);
 
+                // Catch button click event
+                $("#submit").on('click', function(){
+
+                    // Prevent default redirects
+                    event.preventDefault();
+
+                    // Place loading icon
+                    document.getElementById('placeholder').outerHTML = '<div id="placeholder" class="loading loading-lg"></div>';
+                    document.getElementById('meter').outerHTML = '<div id="meter"></div>';
+
+                    // Ajax call to prediction
                     $.ajax({
-                        url: 'predict?' + $.param({ x: document.querySelector('#infant_mortality_rate').value, y: document.querySelector('#malaria_mortality_rate').value, z: document.querySelector('#wash_mortality_rate').value }),
+                        url: 'predict?' + $.param({
+                            x: document.querySelector('#infant_mortality_rate').value,
+                            y: document.querySelector('#malaria_mortality_rate').value,
+                            z: document.querySelector('#wash_mortality_rate').value }),
                         type: 'POST',
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-
                         success: function (response) {
-                            var myObj = $.parseJSON(response);
-                            console.log(myObj[0][""]);
-                            console.log(myObj[1][""]);
+                            // Replace loading icon with response data
+                            document.getElementById('placeholder').outerHTML = '<span id="placeholder">' + response + '</span>';
+                            document.getElementById('meter').outerHTML = '<meter id="meter" class="meter" value="' + response +'" optimum="75" min="40" max="90" low="60" high="85"></meter>';
                         },
                         error: function() {
-                            alert("error");
+                            document.getElementById('placeholder').outerHTML = '<span>There was an error!</span>';
                         }
                     });
                 });
