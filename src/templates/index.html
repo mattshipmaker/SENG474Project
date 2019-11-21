@@ -300,9 +300,6 @@
                             document.getElementById('output').outerHTML = '<span id="output">' + response + '</span>';
                             document.getElementById('meter').outerHTML = '<meter id="meter" class="meter" value="' + response +'" optimum="70" min="40" max="85" low="60" high="75"></meter>';
 
-                            // Insert random country into input
-                            document.getElementById('country_name').value = countries[Math.floor(Math.random() * countries.length)];
-
                             // Find average life expectancy
                             const average_expectancy = 65;  //TODO
                             const expectancy_diff = (response - average_expectancy) / average_expectancy * 100;
@@ -322,6 +319,9 @@
                             nameCell.appendChild(document.createTextNode(document.querySelector('#country_name').value));
                             valueCell.appendChild(document.createTextNode(response));
                             relativeCell.appendChild(document.createTextNode(expectancy_diff.toFixed(3) + '%'));
+
+                             // Insert random country into input
+                            document.getElementById('country_name').value = countries[Math.floor(Math.random() * countries.length)];
                         },
                         error: function() {
                             document.getElementById('output').outerHTML = '<span>There was an error!</span>';
