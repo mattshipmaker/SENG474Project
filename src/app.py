@@ -24,8 +24,8 @@ def predict():
 
     X = np.array([x, y, z])
 
-    # Convert to string and return
-    return str(linreg.run(X, 2016))
+    # Round to three decimal places, convert to string, and return
+    return str(round(linreg.run(X, 2016), 3))
 
 
 @app.route('/', methods=['GET'])
