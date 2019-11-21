@@ -15,13 +15,14 @@ dev_host = '127.0.0.1'
 dev_port = '8080'
 database_name = '../data/db.db'
 
-@app.route('/predict',methods=['POST'])
+
+@app.route('/predict', methods=['POST'])
 def predict():
     x = float(request.args.get('x'))
     y = float(request.args.get('y'))
     z = float(request.args.get('z'))
 
-    X = np.array([x,y,z])
+    X = np.array([x, y, z])
 
     ans = linreg.run(X, 2016)
 
