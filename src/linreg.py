@@ -3,8 +3,10 @@ import numpy as np
 
 np.set_printoptions(suppress=True)
 
+
 def predict(X, weight):
     return np.dot(X, weight)
+
 
 def cost_function(X, y, weight):
     n = len(y)
@@ -25,6 +27,7 @@ def update_weights(X, y, weight, learning_rate):
   
     return weight
 
+
 def train(X, y, weight, learning_rate, iters):
     cost_history = []
   
@@ -35,14 +38,17 @@ def train(X, y, weight, learning_rate, iters):
       
     return weight, cost_history
 
+
 def scale(X, x_min, x_max):
     nom = (X-X.min(axis=0))*(x_max-x_min)
     denom = X.max(axis=0) - X.min(axis=0)
     denom[denom==0] = 1.0
     return x_min + nom/denom
 
+
 def create_weights(n):
     return np.array([[0.0] for i in range(n)])
+
 
 def test(w):
 
@@ -60,6 +66,7 @@ def test(w):
         0.01
     ]])
     return predict(X,w), predict(Y,w)
+
 
 def get_weights(y):
     year = db.get_year(y)
@@ -86,6 +93,7 @@ def get_weights(y):
     w, ch = train(X_scaled, Y, W, 0.001, 100000)
 
     return w
+
 
 def run(predictor, y):
 
