@@ -124,7 +124,7 @@
                                                 <label class="form-label" for="country_name">Country Name</label>
                                             </div>
                                             <div class="col-7 col-sm-12">
-                                                <input class="form-input" type="text" id="country_name" placeholder="Country Name">
+                                                <input id="country_name" class="form-input" type="text" placeholder="Country Name">
                                             </div>
                                             <div class="col-1 col-sm-12"></div>
                                             <div class="col-1 col-sm-12">
@@ -239,6 +239,45 @@
         <script type="text/javascript">
             $(document).ready(function(){
 
+                // Random country name array
+                const countries = ['Natish', 'Eastern Maarland', 'Tonianor', 'Dadwi', 'Irki', 'Genaire Stinebar',
+                    'Seecan Ryniacook', 'Gerchristcroa', 'Republic of Tintiau', 'Ina', 'Northern Ito Landpasta',
+                    'Tuca Isles', 'Runne Moma', 'Bermo Greendo', 'Lapitvirpalva', 'Isle of Riae Coko', 'Suslandsre',
+                    'Niretui', 'Lyca Walporein', 'Thenganitedmomor', 'Theldogypt', 'Gigasumibul', 'Canldives Grecoca',
+                    'Macos Quenianau', 'Central Toxem Ofnordesh', 'Francele Mary', 'Repu', 'Domland Frilau Republic',
+                    'Mii Lands', 'Mua Norngo', 'United Southjan', 'Andczech', 'Letan', 'North Lklandco', 'Naguiingcu',
+                    'Nonsland Viaguiru', 'Slandsi Ofcen Island', 'Cothe Siana', 'Andba Frenchslands', 'Umyher', 'Legin',
+                    'Amebra', 'Geri Massada', 'Razue Lands', 'Thernstates', 'Myanseypados', 'Landstan Sintsloni',
+                    'Tito Territories', 'Rupo Auchique', 'Sternmayotte Giumvina', 'Guaso', 'Serco', 'Soco Maau',
+                    'Kittsten Guernntsercairn', 'United Decar Rasriki', 'Southlu Vaoutcoast', 'Belti Saintrusni',
+                    'Vietslands Lianion', 'Blicbe', 'Laosye Guiriblic', 'Landdi Nitedman', 'Terla Tobyana',
+                    'North Blicni', 'Nilombiablicguastan', 'Slonela', 'Northern Ntarcbo Nakhstan', 'Basope', 'Apu',
+                    'Guayre', 'Martar Rusigui', 'Finnei Dunamo', 'Gharat Nuaba', 'Lasteinsa', 'Jebritish Isnti',
+                    'Guamstan Lands', 'Caili Era', 'New Menmevo', 'Zstankia', 'Galcao', 'Pumau Coica', 'Lyri', 'Tazer',
+                    'Diantic Kerastates', 'Ancro Beminew', 'Geslands Andzamki', 'Standor', 'Riturksnkababwe',
+                    'Mofrench Gabesaint', 'Frenchof Saintluxi', 'Dorblic Engslandskeeling Territories',
+                    'Haigylaneastria', 'Zilswibru', 'Northern Ngaroeli', 'Haratedsri', 'Igan', 'Reraqntinehong',
+                    'Stoeblic', 'Riland', 'United Iu Abu', 'Senicra', 'Nachi Saunguilzim', 'Janis', 'Stinelands',
+                    'Beva', 'Eo', 'Eastern Roonfaslewalespa', 'Stadi Inliahrain', 'Raki', 'Coye Dore', 'Voniani',
+                    'Insland', 'Mishall Morswa', 'Dorblic Ingostan', 'Iofnew', 'Loupenia Ghaastan', 'Ribya Renti',
+                    'Northmac Iue', 'Aandhe Land', 'Coblic Andand', 'Norsouth Sokongnew', 'Dinesnkalandriapu',
+                    'Mikhstan Jaimark', 'Rida', 'Kaand Artu', 'Biaslandsmailu', 'Irus Siatozam', 'Britishkiaxemman',
+                    'Strathern', 'Slandsde', 'Manbenited', 'South Denstansouthruna', 'Theco', 'Guagin Sainttarland',
+                    'Beco Leve', 'Lislands Territories', 'Kiberza Land', 'Dofi', 'Danandine', 'Statesrethua', 'Lekyrre',
+                    'Ugaslyki', 'Ganremac', 'Ratedsal', 'Zecia', 'Volandne', 'Gatarbia', 'Costa Donon Tazea',
+                    'Bardcra Imaba', 'Titvia Stange', 'Rakraine Walmauno', 'Modisu', 'Maland', 'Ibo Evislo',
+                    'Landthern Pierretzer', 'Virlauda', 'Brazi', 'Sialand', 'Nainntarc', 'Netic Pitstates',
+                    'Sternluofia', 'Catral Magreece', 'Nakona', 'Nevia', 'Moarat', 'Virdad', 'Sniathai Souboura',
+                    'Nionlau Iliagua', 'Uly Treaelblic', 'Maland Punin', 'Mihu Gianauna Land', 'South Quenea', 'Marnia',
+                    'Frimi', 'Kepia Isona', 'Tusa', 'Ratesmoaco', 'Rialrocgua', 'Statesakucro', 'Andstonitedru Land',
+                    'Ridian', 'Idorspain', 'Western Siermaii', 'Cole', 'Saupri Liasia', 'Papa Faly', 'Armosaori',
+                    'Denu', 'Outchristslands', 'Blicla', 'Manor Vacumon', 'Central Svalcaqua', 'Care Nitednia', 'Pani',
+                    'Goma', 'Trilom Daporeguya', 'Costa Nibacan', 'Zbesaint Raqblic', 'Central Aldivespuer', 'Randeba',
+                    'Tiante'];
+
+                // Insert random country into input
+                document.getElementById('country_name').value = countries[Math.floor(Math.random() * countries.length)];
+
                 // Catch button click event
                 $("#submit").on('click', function(){
 
@@ -261,6 +300,9 @@
                             // Replace loading icon with response data
                             document.getElementById('placeholder').outerHTML = '<span id="placeholder">' + response + '</span>';
                             document.getElementById('meter').outerHTML = '<meter id="meter" class="meter" value="' + response +'" optimum="75" min="40" max="90" low="60" high="85"></meter>';
+
+                            // Insert random country into input
+                            document.getElementById('country_name').value = countries[Math.floor(Math.random() * countries.length)];
 
                             // Find average life expectancy
                             const average_expectancy = 65;  //TODO
