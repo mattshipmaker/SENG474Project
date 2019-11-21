@@ -215,6 +215,16 @@
                                     </form>
                                     <span>Life Expectancy: </span><div id="placeholder"></div>
                                     <div id="meter"></div>
+                                    <table id="log" class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Country Name</th>
+                                                <th>Life Expectancy</th>
+                                                <th>Relative to Average</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
 
                                 </div>
                             </div>
@@ -251,6 +261,30 @@
                             // Replace loading icon with response data
                             document.getElementById('placeholder').outerHTML = '<span id="placeholder">' + response + '</span>';
                             document.getElementById('meter').outerHTML = '<meter id="meter" class="meter" value="' + response +'" optimum="75" min="40" max="90" low="60" high="85"></meter>';
+
+                            // Find average life expectancy
+                            const average_expectancy = 65;  //TODO
+                            const expectancy_diff = (response - average_expectancy) / average_expectancy * 100;
+
+                            // Get a reference to the table
+                            let tableRef = document.getElementById('log');
+
+                            // Insert a new row at the top of the table
+                            let newRow = tableRef.insertRow(1);
+
+                            // Insert cells into the new row
+                            let dateCell = newRow.insertCell(0);
+                            let valueCell = newRow.insertCell(1);
+                            let meterCell = newRow.insertCell(2);
+
+                            // Append to cells
+                            let dateValue = document.createTextNode(document.querySelector('#country_name').value);
+                            let valueValue = document.createTextNode(response);
+                            let meterValue = document.createTextNode(expectancy_diff.toFixed(3) + '%');
+                            dateCell.appendChild(dateValue);
+                            valueCell.appendChild(valueValue);
+                            meterCell.appendChild(meterValue);
+
                         },
                         error: function() {
                             document.getElementById('placeholder').outerHTML = '<span>There was an error!</span>';
