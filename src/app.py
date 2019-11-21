@@ -28,9 +28,11 @@ def predict():
 
     return jsonify(ans)
 
+
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
+
 
 @app.route('/country', methods=['GET'])
 def country_info():
