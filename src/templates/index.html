@@ -213,19 +213,18 @@
                                         </div>
                                         <button id="submit" class="btn btn-primary p-centered">Create Country</button>
                                     </form>
-                                    <span>Life Expectancy: </span><div id="placeholder"></div>
+                                    <span>Life Expectancy: </span><div id="output"></div>
                                     <div id="meter"></div>
                                     <table id="log" class="table table-striped table-hover">
                                         <thead>
                                             <tr>
                                                 <th>Country Name</th>
-                                                <th>Life Expectancy</th>
-                                                <th>Relative to Average</th>
+                                                <th>Life Expectancy (Years)</th>
+                                                <th>Relative to Average (%)</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </div>
@@ -233,8 +232,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <script type="text/javascript">
             $(document).ready(function(){
@@ -284,8 +281,8 @@
                     // Prevent default redirects
                     event.preventDefault();
 
-                    // Place loading icon
-                    document.getElementById('placeholder').outerHTML = '<div id="placeholder" class="loading loading-lg"></div>';
+                    // Place loading icon and empty meter
+                    document.getElementById('output').outerHTML = '<div id="output" class="loading loading-lg"></div>';
                     document.getElementById('meter').outerHTML = '<div id="meter"></div>';
 
                     // Ajax call to prediction
@@ -297,9 +294,10 @@
                         type: 'POST',
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         success: function (response) {
+
                             // Replace loading icon with response data
-                            document.getElementById('placeholder').outerHTML = '<span id="placeholder">' + response + '</span>';
-                            document.getElementById('meter').outerHTML = '<meter id="meter" class="meter" value="' + response +'" optimum="75" min="40" max="90" low="60" high="85"></meter>';
+                            document.getElementById('output').outerHTML = '<span id="output">' + response + '</span>';
+                            document.getElementById('meter').outerHTML = '<meter id="meter" class="meter" value="' + response +'" optimum="70" min="40" max="85" low="60" high="75"></meter>';
 
                             // Insert random country into input
                             document.getElementById('country_name').value = countries[Math.floor(Math.random() * countries.length)];
@@ -320,12 +318,9 @@
                             let meterCell = newRow.insertCell(2);
 
                             // Append to cells
-                            let dateValue = document.createTextNode(document.querySelector('#country_name').value);
-                            let valueValue = document.createTextNode(response);
-                            let meterValue = document.createTextNode(expectancy_diff.toFixed(3) + '%');
-                            dateCell.appendChild(dateValue);
-                            valueCell.appendChild(valueValue);
-                            meterCell.appendChild(meterValue);
+                            dateCell.appendChild(document.createTextNode(document.querySelector('#country_name').value));
+                            valueCell.appendChild(document.createTextNode(response));
+                            meterCell.appendChild(document.createTextNode(expectancy_diff.toFixed(3) + '%'));
 
                         },
                         error: function() {
