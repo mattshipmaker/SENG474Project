@@ -313,15 +313,14 @@
                             let newRow = tableRef.insertRow(1);
 
                             // Insert cells into the new row
-                            let dateCell = newRow.insertCell(0);
+                            let nameCell = newRow.insertCell(0);
                             let valueCell = newRow.insertCell(1);
-                            let meterCell = newRow.insertCell(2);
+                            let relativeCell = newRow.insertCell(2);
 
                             // Append to cells
-                            dateCell.appendChild(document.createTextNode(document.querySelector('#country_name').value));
+                            nameCell.appendChild(document.createTextNode(document.querySelector('#country_name').value));
                             valueCell.appendChild(document.createTextNode(response));
-                            meterCell.appendChild(document.createTextNode(expectancy_diff.toFixed(3) + '%'));
-
+                            relativeCell.appendChild(document.createTextNode(expectancy_diff.toFixed(3) + '%'));
                         },
                         error: function() {
                             document.getElementById('placeholder').outerHTML = '<span>There was an error!</span>';
