@@ -213,8 +213,9 @@
                                         </div>
                                         <button id="submit" class="btn btn-primary p-centered">Create Country</button>
                                     </form>
-                                    <span>Life Expectancy: </span><div id="output"></div>
-                                    <div id="meter"></div>
+
+                                    <span>Life Expectancy: </span><span id="output"></span><div id="meter"></div>
+
                                     <table id="log" class="table table-striped table-hover">
                                         <thead>
                                             <tr>
@@ -323,7 +324,7 @@
                             relativeCell.appendChild(document.createTextNode(expectancy_diff.toFixed(3) + '%'));
                         },
                         error: function() {
-                            document.getElementById('placeholder').outerHTML = '<span>There was an error!</span>';
+                            document.getElementById('output').outerHTML = '<span>There was an error!</span>';
                         }
                     });
                 });
