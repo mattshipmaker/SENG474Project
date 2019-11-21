@@ -10,6 +10,11 @@
         <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
         <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+
     </head>
     <body>
         <div id="layout" class="pure-g">
@@ -115,10 +120,10 @@
                                     <form class="form-horizontal">
                                         <div class="form-group">
                                             <div class="col-3 col-sm-12">
-                                                <label class="form-label" for="name">Country Name</label>
+                                                <label class="form-label" for="country_name">Country Name</label>
                                             </div>
                                             <div class="col-7 col-sm-12">
-                                                <input class="form-input" type="text" id="name" placeholder="Country Name">
+                                                <input class="form-input" type="text" id="country_name" placeholder="Country Name">
                                             </div>
                                             <div class="col-1 col-sm-12"></div>
                                             <div class="col-1 col-sm-12">
@@ -161,10 +166,10 @@
                                             <br>
                                             <br>
                                             <div class="col-3 col-sm-12">
-                                                <label class="form-label" for="malaria_deaths">Malaria Mortality Rate</label>
+                                                <label class="form-label" for="malaria_mortality_rate">Malaria Mortality Rate</label>
                                             </div>
                                             <div class="col-7 col-sm-12">
-                                                <input class="slider tooltip tooltip-right" type="range" id="malaria_deaths" min="0" max="100" value="50" oninput="this.setAttribute('value', this.value);">
+                                                <input class="slider tooltip tooltip-right" type="range" id="malaria_mortality_rate" min="0" max="100" value="50" oninput="this.setAttribute('value', this.value);">
                                             </div>
                                             <div class="col-1 col-sm-12"></div>
                                             <div class="col-1 col-sm-12">
@@ -206,18 +211,40 @@
                                             </div>
 
                                         </div>
+                                        <button id="submit" class="btn btn-primary p-centered">Create Country</button>
                                     </form>
-
-
-
-                                    <button class="btn btn-primary p-centered">Create Country</button>
                                 </div>
-
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
         </div>
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#submit").on('click', function(){
+                    event.preventDefault();
+                    console.log(document.querySelector('#infant_mortality_rate').value + ", " + document.querySelector('#malaria_mortality_rate').value + ", " + document.querySelector('#wash_mortality_rate').value);
+
+                    $.ajax({
+                        url: 'predict?' + $.param({ x: document.querySelector('#infant_mortality_rate').value, y: document.querySelector('#malaria_mortality_rate').value, z: document.querySelector('#wash_mortality_rate').value }),
+                        type: 'POST',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+                        success: function (response) {
+                            var myObj = $.parseJSON(response);
+                            console.log(myObj[0][""]);
+                            console.log(myObj[1][""]);
+                        },
+                        error: function() {
+                            alert("error");
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
