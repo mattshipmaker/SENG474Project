@@ -2,6 +2,16 @@ import sqlite3
 
 db_name = "../data/db.db"
 
+def get_le_average():
+    con, cur = get_connection()
+    cur.execute("""
+    SELECT c.name, avg(le.both)
+    FROM life_expectancy le
+    JOIN country c ON c.country_id = le.country_id
+    GROUP BY c.country_id;
+    """,())
+    return cur.fetchall()
+
 def get_le_by_year_id(country_id, year_id):
     con,cur = get_connection()
     cur.execute("""SELECT both 
