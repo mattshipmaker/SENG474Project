@@ -105,10 +105,6 @@ def init(dbname):
 
 def main():
     print("SQLite3 database initialization")
-    
-    #init("/home/matt/Documents/School/SENG474/SENG474Project/data/db.db")
-    #full_delete("/home/matt/Documents/School/SENG474/SENG474Project/data/db.db")
-    #imr_delete("../data/db.db")
 
 if __name__ == '__main__':
     main()
