@@ -139,6 +139,40 @@
                                             <br>
                                             <br>
                                             <div class="col-3 col-sm-12">
+                                                <label class="form-label" for="infant_mortality_rate">Prediction Year</label>
+                                            </div>
+                                            <div class="col-7 col-sm-12">
+                                                <div class="form-group">
+                                                    <select class="form-select">
+                                                            <option>Average</option>
+                                                            <option>2018</option>
+                                                            <option>2017</option>
+                                                            <option>2016</option>
+                                                            <option>2015</option>
+                                                            <option>2014</option>
+                                                            <option>2013</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-1 col-sm-12"></div>
+                                            <div class="col-1 col-sm-12">
+                                                <div class="popover popover-right">
+                                                    <a class="btn btn-primary" href="#">About</a>
+                                                    <div class="popover-container">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <div class="card-title h5">Prediction Year</div>
+                                                            </div>
+                                                            <div class="card-body">Choose which year to use for life expectancy prediction. Average uses the average
+                                                            life expectancy for each country.</div>
+                                                            <div class="card-footer"></div>
+                                                        </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="col-3 col-sm-12">
                                                 <label class="form-label" for="infant_mortality_rate">Infant Mortality Rate</label>
                                             </div>
                                             <div class="col-7 col-sm-12">
@@ -208,6 +242,7 @@
                                         </div>
                                         <button id="submit" class="btn btn-primary p-centered">Create Country</button>
                                     </form>
+                                    <div class="divider"></div>
 
                                     <span>Life Expectancy: </span><span id="output"></span><div id="meter"></div>
 
@@ -299,11 +334,8 @@
                             const average_expectancy = 65;  //TODO
                             const expectancy_diff = (response - average_expectancy) / average_expectancy * 100;
 
-                            // Get a reference to the table
-                            let tableRef = document.getElementById('log');
-
                             // Insert a new row at the top of the table
-                            let newRow = tableRef.insertRow(1);
+                            let newRow = document.getElementById('log').insertRow(1);
 
                             // Insert cells into the new row
                             let nameCell = newRow.insertCell(0);
