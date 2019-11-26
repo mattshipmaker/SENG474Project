@@ -26,11 +26,12 @@ def predict():
     x = float(request.args.get('x')) / 100
     y = float(request.args.get('y')) / 100
     z = float(request.args.get('z')) / 100
+    year = request.args.get('year')  # TODO
 
     X = np.array([x, y, z])
 
     # Round to three decimal places, convert to string, and return
-    return str(round(linreg.run(X, 2016), 3))
+    return str(round(linreg.run(X, year), 3))
 
 
 @app.route('/', methods=['GET'])
