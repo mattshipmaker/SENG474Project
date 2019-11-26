@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="{{url_for('static', filename='css/spectre.min.css')}}">
         <link rel="stylesheet" href="{{url_for('static', filename='css/spectre-exp.min.css')}}">
         <link rel="stylesheet" href="{{url_for('static', filename='css/spectre-icons.min.css')}}">
+        <script type="text/javascript" src="{{url_for('static', filename='js/Chart-2.9.3.min.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.4.1.min.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
     <body>
@@ -14,69 +15,66 @@
             <div class="column col-3">
                 <div class="hero hero-lg bg-secondary">
                     <div class="hero-body">
-                        <h1>SENG 474</h1>
-                        <h4>Data Mining Project</h4>
+                        <h1>Life Expectancy Predictor</h1>
+                        <h4>SENG 474 - Data Mining Project</h4>
                         <a href="#"><button class="btn btn-lg">GitHub</button></a>
                         <a href="#"><button class="btn btn-lg">Documentation</button></a>
                         <div class="divider"></div>
                         <h5>About</h5>
-                        <span>Linear regression algorithm<br>
-                            <b>Goal:</b> predict a country's life expectancy <br>
-                            <b>Hypothesis:</b> given a set of all features F(n), there exists
-                            a subset of features F(m) that predict life expectancy to a high accuracy.
+                        <span>
+                            Life expectancy is one of the best indicators of a country’s success. A high life expectancy
+                            usually means the country and its citizens are living a healthy life. Through feature
+                            selection, we try to find if mortality rates are a good predictor of life expectancy - from
+                            apriori inspection, we can assume mortality rates must have an impact on life expectancy.
+                        </span>
+                        <br>
+                        <br>
+                        <span>
+                            We use <a href="https://en.wikipedia.org/wiki/Linear_regression">linear regression</a> to
+                            predict the life expectancy of a hypothetical country, using three unique mortality rates:
                         </span>
                         <div class="divider"></div>
                         <div class="container">
+                            <div class="divider"></div>
+                            <div class="columns">
+                                <div class="column col-10">
+                                    <span>1) Infant Mortality Rate Data</span>
+                                </div>
+                                <div class="column col-1">
+                                    <a href="#" target="_blank">
+                                        <button class="btn">Source</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="columns">
+                                <div class="column col-10">
+                                    <span>2) Malaria Mortality Rate Data</span>
+                                </div>
+                                <div class="column col-1">
+                                    <a href="#" target="_blank">
+                                        <button class="btn">Source</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="columns">
+                                <div class="column col-10">
+                                    <span>3) WASH Mortality Rate Data</span>
+                                </div>
+                                <div class="column col-1">
+                                    <a href="https://apps.who.int/gho/data/view.main.SDGWSHBOD392v?lang=en\" target="_blank">
+                                        <button class="btn">Source</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="divider"></div>
                             <div class="columns">
                                 <div class="column col-10" style="padding-top: 1%">
                                     <span>Life Expectancy by Country Data</span>
                                 </div>
                                 <div class="column col-1">
                                     <a href="https://apps.who.int/gho/data/node.main.688?lang=en" target="_blank">
-                                        <button class="btn">Source</button>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="columns">
-                                <div class="column col-10">
-                                    <span>Infant Mortality Rate Data</span>
-                                </div>
-                                <div class="column col-1">
-                                    <a href="#" target="_blank">
-                                        <button class="btn">Source</button>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="columns">
-                                <div class="column col-10">
-                                    <span>Infant Mortality Rate Data</span>
-                                </div>
-                                <div class="column col-1">
-                                    <a href="#" target="_blank">
-                                        <button class="btn">Source</button>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="columns">
-                                <div class="column col-10">
-                                    <span>Malaria Mortality Rate Data</span>
-                                </div>
-                                <div class="column col-1">
-                                    <a href="#" target="_blank">
-                                        <button class="btn">Source</button>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="columns">
-                                <div class="column col-10">
-                                    <span>WASH Mortality Rate Data</span>
-                                </div>
-                                <div class="column col-1">
-                                    <a href="https://apps.who.int/gho/data/view.main.SDGWSHBOD392v?lang=en\" target="_blank">
                                         <button class="btn">Source</button>
                                     </a>
                                 </div>
@@ -89,6 +87,7 @@
                 <br>
                 <br>
                 <h2>Create Country</h2>
+                <h5>Choose data points to predict the life expectancy of your country</h5>
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="column col-3">
@@ -222,7 +221,28 @@
                 <br>
                 <br>
                 <div id="meter"></div>
-
+                <br>
+                <br>
+                <canvas id="bar_chart" width="800" height="200"></canvas>
+                <script type="text/javascript">
+                     var barChart = new Chart(document.getElementById("bar_chart"), {
+                            type: 'bar',
+                            data: {
+                                labels: [],
+                                datasets: [{
+                                    label: "Life Expectancy",
+                                    data: []
+                                }
+                                ]
+                            },
+                            options: {
+                                legend: { display: false },
+                                title: { display: false }
+                            }
+                        });
+                </script>
+                <br>
+                <br>
                 <table id="log" class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -233,6 +253,9 @@
                     </thead>
                     <tbody></tbody>
                 </table>
+            </div>
+            <div class="column col-3">
+
             </div>
         </div></div>
     </body>

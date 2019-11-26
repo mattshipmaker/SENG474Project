@@ -34,6 +34,10 @@ $(document).ready(function(){
 
     // Insert random country into input
     document.getElementById('country_name').value = countries[Math.floor(Math.random() * countries.length)];
+
+
+
+
      // Catch button click event
     $("#submit").on('click', function(){
 
@@ -76,8 +80,12 @@ $(document).ready(function(){
                 valueCell.appendChild(document.createTextNode(response));
                 relativeCell.appendChild(document.createTextNode(expectancy_diff.toFixed(3) + '%'));
 
+                // Add new data to graph
+                 barChart.addData([40], "Google");
+
                 // Insert random country into input
                 document.getElementById('country_name').value = countries[Math.floor(Math.random() * countries.length)];
+
                 },
             error: function() {
                 document.getElementById('output').outerHTML = '<span class="text-error">There was an error!</span>';
