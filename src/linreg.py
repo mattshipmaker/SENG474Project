@@ -42,8 +42,8 @@ def train(X, y, weight, learning_rate, iters):
 def scale(X, x_min, x_max):
     nom = (X-X.min(axis=0))*(x_max-x_min)
     denom = X.max(axis=0) - X.min(axis=0)
-    denom[denom==0] = 1.0
-    return x_min + nom/denom
+    denom[denom == 0] = 1.0
+    return x_min + nom / denom
 
 
 def create_weights(n):
@@ -65,7 +65,7 @@ def test(w):
         0.01,
         0.01
     ]])
-    return predict(X,w), predict(Y,w)
+    return predict(X, w), predict(Y, w)
 
 
 def get_weights(y):

@@ -5,7 +5,7 @@ country_id: Country
 year_id: Year
 
 Infant Mortality Rate (probability of dying between birth and age 1 (per 1000 live births))
-    both: Both sexs
+    both: Both sexes
     male: Male
     female: Female
 

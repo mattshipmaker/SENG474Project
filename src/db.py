@@ -2,6 +2,7 @@ import sqlite3
 
 db_name = "../data/db.db"
 
+
 def get_le_average():
     con, cur = get_connection()
     cur.execute("""
@@ -9,35 +10,41 @@ def get_le_average():
     FROM life_expectancy le
     JOIN country c ON c.country_id = le.country_id
     GROUP BY c.country_id;
-    """,())
+    """, ())
     return cur.fetchall()
+
 
 def get_le_by_year_id(country_id, year_id):
     con,cur = get_connection()
     cur.execute("""SELECT both 
     FROM life_expectancy 
-    WHERE country_id = ? and year_id = ? """,[country_id, year_id])
+    WHERE country_id = ? and year_id = ? """, [country_id, year_id])
     return cur.fetchone()
+
 
 def get_malaria_deaths():
     con, cur = get_connection()
     cur.execute("""SELECT * FROM malaria_deaths """)
     return cur.fetchall()
 
+
 def get_imr():
     con, cur = get_connection()
     cur.execute("""SELECT * FROM infant_mortality_rate """)
     return cur.fetchall()
+
 
 def get_countries():
     con, cur = get_connection()
     cur.execute("""SELECT * FROM COUNTRY """)
     return cur.fetchall()
 
+
 def get_country(id):
     con, cur = get_connection()
-    cur.execute("""SELECT name FROM country WHERE country_id = ? """,[id])
+    cur.execute("""SELECT name FROM country WHERE country_id = ? """, [id])
     return cur.fetchone()
+
 
 def get_country_data(id):
     con, cur = get_connection()
@@ -49,6 +56,7 @@ def get_country_data(id):
     WHERE c.country_id = ?;
     """, (id))
     return cur.fetchall()
+
 
 def get_country_data_by_year(id, year):
     con, cur = get_connection()
@@ -63,23 +71,28 @@ def get_country_data_by_year(id, year):
     """, (id, year))
     return cur.fetchall()
 
+
 def get_years():
     con, cur = get_connection()
     cur.execute("""SELECT * FROM YEAR """)
     return cur.fetchall()
 
+
 def get_year(year):
     con, cur = get_connection()
-    cur.execute("""SELECT * FROM year WHERE year = ? """,[year])
+    cur.execute("""SELECT * FROM year WHERE year = ? """, [year])
     return cur.fetchone()
+
 
 def get_connection():
     con = sqlite3.connect(db_name)
     cur = con.cursor()
     return con, cur
 
+
 def main():
     print("database")
+
 
 if __name__ == "__main__":
     main()

@@ -4,15 +4,18 @@ import csv
 import db
 import requests
 
+
 def get_year_id(years, year):
-    for (x,y) in years:
+    for (x, y) in years:
         if int(y) == int(year):
             return x
 
+
 def get_country_id(countries, country):
-    for(x,y) in countries:
+    for (x, y) in countries:
         if y == country:
             return x
+
 
 def le():
     con, curs = db.get_connection()
@@ -35,16 +38,16 @@ def le():
             year_id = get_year_id(y, year)
             country_id = get_country_id(c, country)
 
-
-            if(year_id == None or country_id == None):
+            if year_id is None or country_id is None:
                 print(country, year)
             else:
                 curs.execute("""
-                INSERT INTO
-                life_expectancy(country_id, year_id, both, male, female)
-                VALUES(?,?,?,?,?)
-                """,(country_id, year_id, both, male, female))
+                INSERT INTO 
+                life_expectancy(country_id, year_id, both, male, female) 
+                VALUES(?, ?, ?, ?, ?)
+                """, (country_id, year_id, both, male, female))
     con.commit()
+
 
 def wmr():
     con, cur = db.get_connection()
@@ -57,19 +60,18 @@ def wmr():
         for row in reader:
             country_id = get_country_id(countries, row[0])
             if country_id is not None:
-                data = [ r.strip('<').strip(' ') for r in row[1:]]   
-                data.insert(0,year_id)
-                data.insert(0,country_id)
+                data = [r.strip('<').strip(' ') for r in row[1:]]
+                data.insert(0, year_id)
+                data.insert(0, country_id)
 
-                cur.execute("""
-                INSERT INTO wmr(country_id, year_id, both, male, female, both_deaths)
-                VALUES(?,?,?,?,?,?)
-                """, data)
+                cur.execute("""INSERT INTO 
+                wmr(country_id, year_id, both, male, female, both_deaths)
+                VALUES(?, ?, ?, ?, ?, ?)""", data)
     con.commit()
-    return 
+    return
+
 
 def md():
-
     con, cur = db.get_connection()
 
     cur.execute("SELECT * FROM year")
@@ -88,21 +90,20 @@ def md():
 
             for q in yyy:
                 year = q[0]
-                data = q[1].split('[')[0].replace(' ','')
+                data = q[1].split('[')[0].replace(' ', '')
 
                 year_id = get_year_id(y, year)
                 country_id = get_country_id(c, country)
 
                 if country_id is not None:
                     cur.execute(""" 
-                    INSERT INTO malaria_deaths(country_id, year_id, deaths)
-                    VALUES(?, ?, ?)
-                    """,(country_id, year_id, data))
-                    
+                    INSERT INTO 
+                    malaria_deaths(country_id, year_id, deaths) VALUES(?, ?, ?)
+                    """, (country_id, year_id, data))
     con.commit()
 
-def imr():
 
+def imr():
     con, curs = db.get_connection()
 
     curs.execute("SELECT * FROM year")
@@ -115,7 +116,6 @@ def imr():
         reader = csv.reader(f, delimiter=',')
         for row in reader:
             country = row[0]
-            
             year = row[1]
             both = row[2]
             male = row[3]
@@ -128,33 +128,36 @@ def imr():
             year_id = get_year_id(y, year)
             country_id = get_country_id(c, country)
 
-            if(year_id == None or country_id == None):
+            if year_id is None or country_id is None:
                 print(country, year, country_id, year_id)
             else:
                 curs.execute("""INSERT INTO 
                 infant_mortality_rate(country_id, year_id, both, male, female, both_b, both_c, male_c, female_c)
-                VALUES(?,?,?,?,?,?,?,?,?)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (country_id, year_id, both, male, female, both_b, both_c, male_c, female_c))
     con.commit()
+
 
 def year():
     con = None
     try:
         con, curs = db.get_connection()
 
-        years = [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
+        years = [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006,
+                 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
         i = 0
         for year in years:
             curs.execute("""
-            INSERT INTO year(year_id, year) values(?,?)
-            """, (i,year))
+            INSERT INTO year(year_id, year) VALUES(?, ?)
+            """, (i, year))
             i = i + 1
 
     except Error as e:
-        print("failed to insert years: {}".format(e))
+        print("Failed to insert years: {}".format(e))
     finally:
         con.commit()
         con.close()
+
 
 def country():
     rows = []
@@ -169,7 +172,7 @@ def country():
         con, curs = db.get_connection()
         i = 0
         for r in rows:
-            curs.execute("INSERT INTO country(country_id, name) VALUES(?,?) ", (i,r))
+            curs.execute("INSERT INTO country(country_id, name) VALUES(?, ?) ", (i, r))
             curs.lastrowid
             i = i + 1
     except Error as e:
@@ -178,14 +181,16 @@ def country():
         con.commit()
         con.close()
 
+
 def main():
-    print("for reading csv -> insert into db")
-    #country()
-    #year()
-    #imr()
-    #md()
-    #le()
-    #wmr()
+    print("For reading csv -> insert into db")
+    # country()
+    # year()
+    # imr()
+    # md()
+    # le()
+    # wmr()
+
 
 if __name__ == "__main__":
     main()

@@ -15,6 +15,7 @@ dev_host = '127.0.0.1'
 dev_port = '8080'
 database_name = '../data/db.db'
 
+
 @app.route('/country/average', methods=['GET'])
 def average():
     array = db.get_le_average()

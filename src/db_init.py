@@ -2,9 +2,11 @@ import sqlite3
 from sqlite3 import Error
 import db
 
+
 def imr_delete(dbname):
     con, curs = db.get_connection()
-    curs.execute(""" DROP TABLE infant_mortality_rate""")
+    curs.execute("""DROP TABLE infant_mortality_rate""")
+
 
 def full_delete(dbname):
     con = sqlite3.connect(dbname)
@@ -26,21 +28,22 @@ def full_delete(dbname):
         """)
 
     except Error as e:
-        print("failed to delete: {e}".format(e))
+        print("Failed to delete: {e}".format(e))
+
 
 def init(dbname):
     conn = sqlite3.connect(dbname)
     curs = conn.cursor()
 
     try:
-    ## create country 
+    ## Create country
         curs.execute("""
         CREATE TABLE IF NOT EXISTS country(
             country_id INTEGER PRIMARY KEY AUTOINCREMENT, 
             name STRING NOT NULL);
         """)
 
-    ## create year table
+    ## Create year table
         curs.execute("""
         CREATE TABLE IF NOT EXISTS year(
             year_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -98,13 +101,15 @@ def init(dbname):
             FOREIGN KEY(year_id) REFERENCES year(year_id));
         """)
 
-        print("Sucess")
+        print("Success")
 
     except Error as e:
-        print("failed to init db tables: {}".format(e))
+        print("Failed to init db tables: {}".format(e))
+
 
 def main():
     print("SQLite3 database initialization")
+
 
 if __name__ == '__main__':
     main()
