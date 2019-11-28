@@ -12,7 +12,7 @@
         <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
     <body>
         <div class="container"><div class="columns">
-            <div class="column col-3">
+            <div class="column col-4">
                 <div class="hero hero-lg bg-secondary">
                     <div class="hero-body">
                         <h1>Life Expectancy Predictor</h1>
@@ -36,29 +36,27 @@
                         <div class="divider"></div>
                         <div class="container">
                             <div class="divider"></div>
-                            <div class="columns">
+                            <div class="columns m-1">
                                 <div class="column col-10">
                                     <span>1) Infant Mortality Rate Data</span>
                                 </div>
                                 <div class="column col-1">
-                                    <a href="#" target="_blank">
+                                    <a href="http://apps.who.int/gho/data/node.main.525?lang=en" target="_blank">
                                         <button class="btn">Source</button>
                                     </a>
                                 </div>
                             </div>
-                            <div class="divider"></div>
-                            <div class="columns">
+                            <div class="columns m-1">
                                 <div class="column col-10">
                                     <span>2) Malaria Mortality Rate Data</span>
                                 </div>
                                 <div class="column col-1">
-                                    <a href="#" target="_blank">
+                                    <a href="http://apps.who.int/gho/data/node.main.A1368?lang=en" target="_blank">
                                         <button class="btn">Source</button>
                                     </a>
                                 </div>
                             </div>
-                            <div class="divider"></div>
-                            <div class="columns">
+                            <div class="columns m-1">
                                 <div class="column col-10">
                                     <span>3) WASH Mortality Rate Data</span>
                                 </div>
@@ -68,8 +66,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="divider"></div>
-                            <div class="columns">
+                            <div class="columns m-1">
                                 <div class="column col-10" style="padding-top: 1%">
                                     <span>Life Expectancy by Country Data</span>
                                 </div>
@@ -83,9 +80,7 @@
                     </div>
                 </div>
             </div>
-            <div class="column col-6">
-                <br>
-                <br>
+            <div class="column col-8 mt-2">
                 <h2>Create Country</h2>
                 <h5>Choose data points to predict the life expectancy of your country</h5>
                 <form class="form-horizontal">
@@ -113,7 +108,7 @@
                         <br>
                         <br>
                         <div class="column col-3">
-                            <label class="form-label" for="infant_mortality_rate">Prediction Year</label>
+                            <label class="form-label" for="prediction_year">Prediction Year</label>
                         </div>
                         <div class="column col-6">
                             <div class="form-group">
@@ -234,7 +229,6 @@
                     <tbody></tbody>
                 </table>
             </div>
-            <div class="column col-3"></div>
         </div></div>
     </body>
 </html>
