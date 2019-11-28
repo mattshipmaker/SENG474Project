@@ -18,7 +18,7 @@
                         <h1>Life Expectancy Predictor</h1>
                         <h4>SENG 474 - Data Mining Project</h4>
                         <a href="#"><button class="btn btn-lg">GitHub</button></a>
-                        <a href="#"><button class="btn btn-lg">Documentation</button></a>
+                        <a href="{{url_for('static', filename='Life Expectancy Predictor Documentation.pdf')}}"><button class="btn btn-lg">Documentation</button></a>
                         <div class="divider"></div>
                         <h5>About</h5>
                         <span>
@@ -92,7 +92,7 @@
                             <input id="country_name" class="form-input" type="text" placeholder="Country Name">
                         </div>
                         <div class="column col-3">
-                            <div class="popover popover-right">
+                            <div class="popover popover-bottom">
                                 <button class="btn btn-secondary">About</button>
                                 <div class="popover-container">
                                     <div class="card">
@@ -112,20 +112,19 @@
                         </div>
                         <div class="column col-6">
                             <div class="form-group">
-                                <select id="prediction_year" class="form-select">
-                                    <option>2016</option>
+                                <select id="prediction_year" class="form-select"><!--
                                     <option>Average</option>
                                     <option>2018</option>
-                                    <option>2017</option>
-                                    <option>2016</option>
+                                    <option>2017</option> -->
+                                    <option>2016</option><!--
                                     <option>2015</option>
                                     <option>2014</option>
-                                    <option>2013</option>
+                                    <option>2013</option>-->
                                 </select>
                             </div>
                         </div>
                         <div class="column col-3">
-                            <div class="popover popover-right">
+                            <div class="popover popover-bottom">
                                 <button class="btn btn-secondary">About</button>
                                 <div class="popover-container">
                                     <div class="card">
@@ -148,7 +147,7 @@
                             <input class="slider tooltip tooltip-right" type="range" id="infant_mortality_rate" min="0" max="100" value="50" oninput="this.setAttribute('value', this.value);">
                         </div>
                         <div class="column col-3">
-                            <div class="popover popover-right">
+                            <div class="popover popover-bottom">
                                 <button class="btn btn-secondary">About</button>
                                 <div class="popover-container">
                                     <div class="card">
@@ -170,7 +169,7 @@
                             <input class="slider tooltip tooltip-right" type="range" id="malaria_mortality_rate" min="0" max="100" value="50" oninput="this.setAttribute('value', this.value);">
                         </div>
                         <div class="column col-3">
-                            <div class="popover popover-right">
+                            <div class="popover popover-bottom">
                                 <button class="btn btn-secondary">About</button>
                                 <div class="popover-container">
                                     <div class="card">
@@ -192,7 +191,7 @@
                             <input class="slider tooltip tooltip-right" type="range" id="wash_mortality_rate" min="0" max="100" value="50" oninput="this.setAttribute('value', this.value);">
                         </div>
                         <div class="column col-3">
-                            <div class="popover popover-right">
+                            <div class="popover popover-bottom">
                                 <button class="btn btn-secondary">About</button>
                                 <div class="popover-container">
                                     <div class="card">
